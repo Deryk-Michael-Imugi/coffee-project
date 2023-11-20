@@ -1,28 +1,23 @@
 "use strict"
 
 function renderCoffee(coffee) {
-    let html = '<tr class="coffee">';
-    html += `<td>${coffee.id}</td>`;
-    html += `<td>${coffee.name}</td>`;
-    html += `<td>${coffee.roast}</td>`;
-    html += '</tr>';
+    const coffeeDiv = document.createElement("div");
+    coffeeDiv.classList.add("coffee")
+    coffeeDiv.innerHTML = `<h2>coffee.name</h2><p>coffee.roast</p> `
+    document.querySelector(".coffee-display").appendChild(coffeeDiv)
 
-    return html;
 }
-
 function renderCoffees(coffees) {
-    let html = '';
-    for(let i = coffees.length - 1; i >= 0; i--) {
-        html += renderCoffee(coffees[i]);
+    for (let i = coffees.length - 1; i >= 0; i--) {
+        renderCoffee(coffees[i])
     }
-    return html;
 }
 
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     const selectedRoast = roastSelection.value;
     const filteredCoffees = [];
-    coffees.forEach( coffee => {
+    coffees.forEach(coffee => {
         if (coffee.roast === selectedRoast) {
             filteredCoffees.push(coffee);
         }

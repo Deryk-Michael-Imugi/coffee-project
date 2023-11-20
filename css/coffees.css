@@ -1,0 +1,19 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
+}
+
+
+.coffee-display{
+    background-color: #027979;
+    #coffees{
+
+        background-color: red;
+
+
+    }
+    .coffee{
+        background-color: purple;
+    }
+}
