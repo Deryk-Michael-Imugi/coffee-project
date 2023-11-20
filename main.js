@@ -1,6 +1,32 @@
 "use strict"
 
+const roastSelection = document.querySelector('#roast-selection');
+const nameSelection = document.querySelector('#name-selection');
 const submitButton = document.querySelector('#submit');
+const addRoastButton = document.querySelector('#add-submit');
+
+let coffees = [
+    {id: 1, name: 'Light City', roast: 'light'},
+    {id: 2, name: 'Half City', roast: 'light'},
+    {id: 3, name: 'Cinnamon', roast: 'light'},
+    {id: 4, name: 'City', roast: 'medium'},
+    {id: 5, name: 'American', roast: 'medium'},
+    {id: 6, name: 'Breakfast', roast: 'medium'},
+    {id: 7, name: 'High', roast: 'dark'},
+    {id: 8, name: 'Continental', roast: 'dark'},
+    {id: 9, name: 'New Orleans', roast: 'dark'},
+    {id: 10, name: 'European', roast: 'dark'},
+    {id: 11, name: 'Espresso', roast: 'dark'},
+    {id: 12, name: 'Viennese', roast: 'dark'},
+    {id: 13, name: 'Italian', roast: 'dark'},
+    {id: 14, name: 'French', roast: 'dark'},
+];
+
+
+
+loadCoffees()
+
+
 
 
 function createCoffee(coffee) {
@@ -39,70 +65,61 @@ function addCoffee(e) {
     const name = document.querySelector("#add-name").value.toLowerCase()
     const roast = document.querySelector("#add-roast").value.toLowerCase()
     const newCoffee = {}
-        if (name.length > 0) {
-            newCoffee.id = "";
-            newCoffee.name = name;
-            newCoffee.roast = roast;
-            coffees.push(newCoffee);
+    if (name.length > 0) {
+        newCoffee.id = calculateId();
+        newCoffee.name = name;
+        newCoffee.roast = roast;
+        coffees.push(newCoffee);
+        localStorage.setItem("savedCoffees", JSON.stringify(coffees))
+    }
+    if (name.length === 0) {
+        alert("Write something")
+    }
+
+    updateCoffees(e);
+
+    function calculateId() {
+        let highestID = 0;
+        for (let coffee of coffees) {
+            if (coffee.id > highestID) {
+                highestID = coffee.id
+            }
         }
-        updateCoffees(e);
+        return highestID + 1
+    }
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
-const coffees = [
-    {id: 1, name: 'Light City', roast: 'light'},
-    {id: 2, name: 'Half City', roast: 'light'},
-    {id: 3, name: 'Cinnamon', roast: 'light'},
-    {id: 4, name: 'City', roast: 'medium'},
-    {id: 5, name: 'American', roast: 'medium'},
-    {id: 6, name: 'Breakfast', roast: 'medium'},
-    {id: 7, name: 'High', roast: 'dark'},
-    {id: 8, name: 'Continental', roast: 'dark'},
-    {id: 9, name: 'New Orleans', roast: 'dark'},
-    {id: 10, name: 'European', roast: 'dark'},
-    {id: 11, name: 'Espresso', roast: 'dark'},
-    {id: 12, name: 'Viennese', roast: 'dark'},
-    {id: 13, name: 'Italian', roast: 'dark'},
-    {id: 14, name: 'French', roast: 'dark'},
-];
-renderCoffees(coffees)
-// const tbody = document.querySelector('#coffees');
-const roastSelection = document.querySelector('#roast-selection');
 
-;
+renderCoffees(coffees)
+
+
+
 
 submitButton.addEventListener('click', (e) => {
     updateCoffees(e);
     // nameSelection.value = "";
 })
 
-
-/*  Testing */
-document.addEventListener('keypress', (e) => {
-
-    console.log(e.currentTarget)
-    if (e.key === "q") {
-
-        document.querySelector(".coffee-display").innerHTML = "";
-
-        addCoffee(e);
-
-
-
-    }
-})
-
 //adding nameSelection Listener
-const nameSelection = document.querySelector('#name-selection');
-
 nameSelection.addEventListener('input', (e) => {
     updateCoffees(e);
 });
 
 //adding eventListener for add-roast submit button
-const addRoastButton = document.querySelector('#add-submit');
-
 addRoastButton.addEventListener('click', (e) => {
     addCoffee(e);
 
 });
+roastSelection.addEventListener("change", (e)=>{
+    updateCoffees(e)
+});
+
+
+// Retrieve save coffees array and loads if save is found
+function loadCoffees(){
+    let load = JSON.parse(localStorage.getItem('savedCoffees'))
+    if (load !==null){
+        coffees = load;
+    }
+}
