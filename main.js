@@ -9,6 +9,7 @@ function createCoffee(coffee) {
     coffeeDiv.innerHTML = `<h2>${coffee.name}</h2><p>${coffee.roast}</p> `
     document.querySelector(".coffee-display").appendChild(coffeeDiv)
 }
+
 function renderCoffees(coffees) {
     for (let i = 0; i < coffees.length; i++) {
         createCoffee(coffees[i])
@@ -16,23 +17,35 @@ function renderCoffees(coffees) {
 }
 
 function updateCoffees(e) {
-    e.preventDefault(); // don't submit the form, we just want to update the data
+    e.preventDefault();// don't submit the form, we just want to update the data
     document.querySelector(".coffee-display").innerHTML = "";
     const selectedRoast = roastSelection.value;
+    const coffeeNameFilter = nameSelection.value.toLowerCase();
     const filteredCoffees = [];
-    coffees.forEach(coffee => {
-        if (selectedRoast === "all"){
-            filteredCoffees.push(coffee)
-        }
 
-        if (coffee.roast === selectedRoast) {
-            filteredCoffees.push(coffee);
+    coffees.forEach((coffee) => {
+        if (selectedRoast === 'all' || coffee.roast === selectedRoast) {
+            if (coffee.name.toLowerCase().includes(coffeeNameFilter)) {
+                filteredCoffees.push(coffee);
+            }
         }
     });
-   renderCoffees(filteredCoffees);
 
-   console.log(selectedRoast)
+    renderCoffees(filteredCoffees);
+}
 
+function addCoffee(e) {
+    e.preventDefault();
+    const name = document.querySelector("#add-name").value.toLowerCase()
+    const roast = document.querySelector("#add-roast").value.toLowerCase()
+    const newCoffee = {}
+        if (name.length > 0) {
+            newCoffee.id = "";
+            newCoffee.name = name;
+            newCoffee.roast = roast;
+            coffees.push(newCoffee);
+        }
+        updateCoffees(e);
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
@@ -64,17 +77,32 @@ submitButton.addEventListener('click', (e) => {
 })
 
 
-
-
 /*  Testing */
-document.addEventListener('keypress',(e)=>{
+document.addEventListener('keypress', (e) => {
 
     console.log(e.currentTarget)
-    if (e.key === "q"){
+    if (e.key === "q") {
 
         document.querySelector(".coffee-display").innerHTML = "";
-        alert("df")
+
+        addCoffee(e);
+
 
 
     }
 })
+
+//adding nameSelection Listener
+const nameSelection = document.querySelector('#name-selection');
+
+nameSelection.addEventListener('input', (e) => {
+    updateCoffees(e);
+});
+
+//adding eventListener for add-roast submit button
+const addRoastButton = document.querySelector('#add-submit');
+
+addRoastButton.addEventListener('click', (e) => {
+    addCoffee(e);
+
+});

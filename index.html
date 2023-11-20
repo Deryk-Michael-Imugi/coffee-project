@@ -53,23 +53,24 @@
             </div>
             <hr>
             <div>
+                <!-- Add Coffee Form -->
                 <form>
                     <fieldset>
-                        <h1 class="text-center">Add a Coffee</h1>
+                        <h1 class="text-center mt-3">Add a Coffee</h1>
                         <div class="mb-3">
-                            <label for="select2" class="form-label"><strong>Roast</strong></label>
-                            <select id="select2" class="form-select">
+                            <label for="add-roast" class="form-label"><strong>Roast</strong></label>
+                            <select id="add-roast" class="form-select">
                                 <option>light</option>
                                 <option>medium</option>
                                 <option>dark</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="textInput2" class="form-label"><strong>Name</strong></label>
-                            <input type="text" id="textInput2" class="form-control" placeholder="">
+                            <label for="add-name" class="form-label"><strong>Name</strong></label>
+                            <input type="text" id="add-name" class="form-control" placeholder="">
                         </div>
-                        <div class="d-flex align-items-center">
-                            <!--                            <button type="submit" class="btn btn-primary flex-grow-1">Submit</button>-->
+                        <div class="d-grid mb-3">
+                            <button type="submit" id="add-submit" class="btn btn-primary flex-grow-1">Submit</button>
                         </div>
                     </fieldset>
                 </form>
@@ -77,8 +78,6 @@
         </div>
     </div>
 </div>
-
-
 <script src="main.js"></script>
 </body>
 </html>
