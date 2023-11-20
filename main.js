@@ -1,28 +1,38 @@
 "use strict"
 
-function renderCoffee(coffee) {
+const submitButton = document.querySelector('#submit');
+
+
+function createCoffee(coffee) {
     const coffeeDiv = document.createElement("div");
     coffeeDiv.classList.add("coffee")
-    coffeeDiv.innerHTML = `<h2>coffee.name</h2><p>coffee.roast</p> `
+    coffeeDiv.innerHTML = `<h2>${coffee.name}</h2><p>${coffee.roast}</p> `
     document.querySelector(".coffee-display").appendChild(coffeeDiv)
-
 }
 function renderCoffees(coffees) {
-    for (let i = coffees.length - 1; i >= 0; i--) {
-        renderCoffee(coffees[i])
+    for (let i = 0; i < coffees.length; i++) {
+        createCoffee(coffees[i])
     }
 }
 
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
+    document.querySelector(".coffee-display").innerHTML = "";
     const selectedRoast = roastSelection.value;
     const filteredCoffees = [];
     coffees.forEach(coffee => {
+        if (selectedRoast === "all"){
+            filteredCoffees.push(coffee)
+        }
+
         if (coffee.roast === selectedRoast) {
             filteredCoffees.push(coffee);
         }
     });
-    tbody.innerHTML = renderCoffees(filteredCoffees);
+   renderCoffees(filteredCoffees);
+
+   console.log(selectedRoast)
+
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
@@ -42,11 +52,29 @@ const coffees = [
     {id: 13, name: 'Italian', roast: 'dark'},
     {id: 14, name: 'French', roast: 'dark'},
 ];
-
-const tbody = document.querySelector('#coffees');
-const submitButton = document.querySelector('#submit');
+renderCoffees(coffees)
+// const tbody = document.querySelector('#coffees');
 const roastSelection = document.querySelector('#roast-selection');
 
-tbody.innerHTML = renderCoffees(coffees);
+;
 
-submitButton.addEventListener('click', updateCoffees);
+submitButton.addEventListener('click', (e) => {
+    updateCoffees(e);
+    // nameSelection.value = "";
+})
+
+
+
+
+/*  Testing */
+document.addEventListener('keypress',(e)=>{
+
+    console.log(e.currentTarget)
+    if (e.key === "q"){
+
+        document.querySelector(".coffee-display").innerHTML = "";
+        alert("df")
+
+
+    }
+})

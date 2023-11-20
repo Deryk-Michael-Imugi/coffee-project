@@ -8,12 +8,12 @@
 .coffee-display{
     background-color: #027979;
     #coffees{
-
         background-color: red;
-
-
     }
     .coffee{
         background-color: purple;
+        display: flex;
+        flex-flow: row wrap;
+        margin: .5em
     }
 }
