@@ -1,19 +1,97 @@
-*{
+* {
     box-sizing: border-box;
-    margin:0;
+    margin: 0;
     padding: 0;
 }
 
+:root{
+    --bg: ;
+    --font-color: #794919;
+    --bg-dark: hsla(158, 51%, 10%, 0.44);
+}
+body {
+    background-color: #00a984;
+}
 
-.coffee-display{
-    background-color: #027979;
-    #coffees{
-        background-color: red;
+main{
+    color: var(--font-color);
+}
+.sec-1 {
+    background-color: var(--bg-dark);
+    & h1 {
+        padding: .5em;
     }
-    .coffee{
-        background-color: purple;
+
+}
+
+.sec-2 {
+    padding: .5em;
+}
+
+.coffee-display {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: start;
+
+    .coffee {
+        min-width: 200px;
+        width: 40%;
+        flex-grow: 1;
+        margin: .5em;
         display: flex;
-        flex-flow: row wrap;
-        margin: .5em
+        flex-flow: row;
+        align-items: end;
+
+        & h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        & p {
+            color: rgba(105, 62, 21, 0.65);
+            margin: 0;
+            padding: 0;
+        }
+
+
     }
+
+}
+
+.search-add {
+    & label{
+        font-weight: 700;
+    }
+    & input, & select{
+        background-color: var(--bg-dark);
+        border: none;
+        color: var(--font-color);
+        font-size: 1.2rem;
+        &:focus{
+            background-color: var(--bg-dark);
+            color: var(--font-color);
+        }
+        &:active{
+            color: var(--font-color);
+        }
+    }
+    .form-search{
+        & h2{
+            text-align: center;
+            color: var(--font-color);
+        }
+    }
+
+    & button{
+        color: var(--font-color);
+        background-color: var(--bg-dark);
+        border: none;
+        padding: .5em;
+        border-radius: .5em;
+        font-size: 1.2rem;
+        &:hover{
+            background-color: rgba(255, 255, 255, 0.36);
+        }
+    }
+
 }

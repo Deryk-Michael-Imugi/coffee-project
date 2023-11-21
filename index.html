@@ -10,74 +10,67 @@
 
 </head>
 <body>
+<header></header>
+<main>
 
-<div class="container">
-    <div class="row">
-        <header class="text-center my-4">
+<div>
+    <section class="sec-1">
+        <header class="text-center">
+            <h1>Coffees</h1>
         </header>
-        <hr>
-    </div>
+    </section>
 
     <!--Bottom Section-->
-    <div class="row">
+    <section class="sec-2 row">
         <div class="coffee-display col-md-6">
-            <div id="coffees">
-                <!--coffee here-->
-            </div>
+
         </div>
-
-        <div class="col-md-6">
-            <div>
+        <div class="search-add  col-md-6">
+            <div class="form-search">
+                <h2>Search Coffee</h2>
                 <form>
-
-                    <form class="">
-                        <div class="mb-3">
-                            <label class="form-label" for="roast-selection">Roast</label>
-                            <select class="form-select" id="roast-selection">
-                                <option>all</option>
-                                <option>light</option>
-                                <option>medium</option>
-                                <option>dark</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="name-selection" class="form-label">Coffee Name</label>
-                            <input type="text" name="coffeeName" id="name-selection" class="form-control">
-                        </div>
-                        <div class="d-grid mb-3">
-                            <input id="submit" type="submit" class="btn btn-primary"/>
-                        </div>
-                    </form>
-
+                    <div class="mb-3">
+                        <label class="form-label" for="roast-selection">Roast</label>
+                        <select class="form-select" id="roast-selection">
+                            <option>All</option>
+                            <option>Light</option>
+                            <option>Medium</option>
+                            <option>Dark</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name-selection" class="form-label">Coffee Name</label>
+                        <input type="text" name="coffeeName" id="name-selection" class="form-control">
+                    </div>
                 </form>
             </div>
             <hr>
-            <div>
+            <div class=".form-add">
                 <!-- Add Coffee Form -->
                 <form>
-                    <fieldset>
-                        <h1 class="text-center mt-3">Add a Coffee</h1>
-                        <div class="mb-3">
-                            <label for="add-roast" class="form-label"><strong>Roast</strong></label>
-                            <select id="add-roast" class="form-select">
-                                <option>light</option>
-                                <option>medium</option>
-                                <option>dark</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="add-name" class="form-label"><strong>Name</strong></label>
-                            <input type="text" id="add-name" class="form-control" placeholder="">
-                        </div>
-                        <div class="d-grid mb-3">
-                            <button type="submit" id="add-submit" class="btn btn-primary flex-grow-1">Submit</button>
-                        </div>
-                    </fieldset>
+                    <h2 class="text-center mt-3">Add a Coffee</h2>
+                    <div class="mb-3">
+                        <label for="add-roast" class="form-label">Roast</label>
+                        <select id="add-roast" class="form-select">
+                            <option>Light</option>
+                            <option>Medium</option>
+                            <option>Dark</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="add-name" class="form-label">Name</label>
+                        <input type="text" id="add-name" class="form-control" placeholder="">
+                    </div>
+                    <div class="d-grid mb-3">
+                        <button type="submit" id="add-submit" class="flex-grow-1">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 </div>
+</main>
+<footer></footer>
 <script src="main.js"></script>
 </body>
 </html>

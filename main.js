@@ -4,7 +4,7 @@ const roastSelection = document.querySelector('#roast-selection');
 const nameSelection = document.querySelector('#name-selection');
 const submitButton = document.querySelector('#submit');
 const addRoastButton = document.querySelector('#add-submit');
-
+// from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 let coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
     {id: 2, name: 'Half City', roast: 'light'},
@@ -22,17 +22,12 @@ let coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
-
-
 loadCoffees()
-
-
-
 
 function createCoffee(coffee) {
     const coffeeDiv = document.createElement("div");
     coffeeDiv.classList.add("coffee")
-    coffeeDiv.innerHTML = `<h2>${coffee.name}</h2><p>${coffee.roast}</p> `
+    coffeeDiv.innerHTML = `<h2>${firstLetterUpperCase(coffee.name)}</h2><p>${firstLetterUpperCase(coffee.roast)}</p> `
     document.querySelector(".coffee-display").appendChild(coffeeDiv)
 }
 
@@ -45,7 +40,7 @@ function renderCoffees(coffees) {
 function updateCoffees(e) {
     e.preventDefault();// don't submit the form, we just want to update the data
     document.querySelector(".coffee-display").innerHTML = "";
-    const selectedRoast = roastSelection.value;
+    const selectedRoast = roastSelection.value.toLowerCase();
     const coffeeNameFilter = nameSelection.value.toLowerCase();
     const filteredCoffees = [];
 
@@ -62,8 +57,8 @@ function updateCoffees(e) {
 
 function addCoffee(e) {
     e.preventDefault();
-    const name = document.querySelector("#add-name").value.toLowerCase()
-    const roast = document.querySelector("#add-roast").value.toLowerCase()
+    const name = document.querySelector("#add-name").value.toLowerCase().trim();
+    const roast = document.querySelector("#add-roast").value.toLowerCase();
     const newCoffee = {}
     if (name.length > 0) {
         newCoffee.id = calculateId();
@@ -73,7 +68,7 @@ function addCoffee(e) {
         localStorage.setItem("savedCoffees", JSON.stringify(coffees))
     }
     if (name.length === 0) {
-        alert("Write something")
+        alert("Name can not be empty")
     }
 
     updateCoffees(e);
@@ -89,17 +84,11 @@ function addCoffee(e) {
     }
 }
 
-// from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 
 renderCoffees(coffees)
 
+/*---------Event Listeners---------*/
 
-
-
-submitButton.addEventListener('click', (e) => {
-    updateCoffees(e);
-    // nameSelection.value = "";
-})
 
 //adding nameSelection Listener
 nameSelection.addEventListener('input', (e) => {
@@ -111,15 +100,39 @@ addRoastButton.addEventListener('click', (e) => {
     addCoffee(e);
 
 });
-roastSelection.addEventListener("change", (e)=>{
+roastSelection.addEventListener("change", (e) => {
     updateCoffees(e)
 });
 
 
+// Capitalize first letter
+function firstLetterUpperCase(str) {
+       return str.replace(/\w\S*/g, function(txt){
+           return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+       });
+}
+
 // Retrieve save coffees array and loads if save is found
-function loadCoffees(){
+function loadCoffees() {
     let load = JSON.parse(localStorage.getItem('savedCoffees'))
-    if (load !==null){
+    if (load !== null) {
         coffees = load;
     }
 }
+
+/*Clear local storage*/
+let position = 0;
+document.addEventListener("keyup", e => {
+    const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "a", "b", "b"]
+    console.log(e.key)
+    if (konamiCode[position] === e.key) {
+        position++
+    } else {
+        position = 0
+    }
+    if (position === konamiCode.length) {
+        position = 0
+        localStorage.removeItem("savedCoffees");
+        location.reload()
+    }
+})
