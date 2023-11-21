@@ -1,10 +1,11 @@
-"use strict"
+"use strict"; // Enable strict mode
 
+// Select relevant HTML elements
 const roastSelection = document.querySelector('#roast-selection');
 const nameSelection = document.querySelector('#name-selection');
-const submitButton = document.querySelector('#submit');
 const addRoastButton = document.querySelector('#add-submit');
-// from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
+
+// Default coffee data with id, names, and roast types
 let coffees = [
     {id: 1, name: 'Light City', roast: 'light'},
     {id: 2, name: 'Half City', roast: 'light'},
@@ -22,8 +23,10 @@ let coffees = [
     {id: 14, name: 'French', roast: 'dark'},
 ];
 
+//Load coffee data
 loadCoffees()
 
+// Function to create a coffee element in the DOM
 function createCoffee(coffee) {
     const coffeeDiv = document.createElement("div");
     coffeeDiv.classList.add("coffee")
@@ -31,19 +34,22 @@ function createCoffee(coffee) {
     document.querySelector(".coffee-display").appendChild(coffeeDiv)
 }
 
+// Function to render a list of coffees in the DOM
 function renderCoffees(coffees) {
     for (let i = 0; i < coffees.length; i++) {
         createCoffee(coffees[i])
     }
 }
 
+// Function to update displayed coffees based on filters
 function updateCoffees(e) {
-    e.preventDefault();// don't submit the form, we just want to update the data
+    e.preventDefault(); // Prevent form submission
     document.querySelector(".coffee-display").innerHTML = "";
     const selectedRoast = roastSelection.value.toLowerCase();
     const coffeeNameFilter = nameSelection.value.toLowerCase();
     const filteredCoffees = [];
 
+    // Filter coffees based on selected roast and name filter
     coffees.forEach((coffee) => {
         if (selectedRoast === 'all' || coffee.roast === selectedRoast) {
             if (coffee.name.toLowerCase().includes(coffeeNameFilter)) {
@@ -55,11 +61,14 @@ function updateCoffees(e) {
     renderCoffees(filteredCoffees);
 }
 
+// Function to add a new coffee
 function addCoffee(e) {
     e.preventDefault();
     const name = document.querySelector("#add-name").value.toLowerCase().trim();
     const roast = document.querySelector("#add-roast").value.toLowerCase();
     const newCoffee = {}
+
+    // Check if the name is not empty
     if (name.length > 0) {
         newCoffee.id = calculateId();
         newCoffee.name = name;
@@ -67,12 +76,15 @@ function addCoffee(e) {
         coffees.push(newCoffee);
         localStorage.setItem("savedCoffees", JSON.stringify(coffees))
     }
+
+    // Display an alert if the name is empty
     if (name.length === 0) {
         alert("Name can not be empty")
     }
 
     updateCoffees(e);
 
+    // Calculate a unique ID for the new coffee
     function calculateId() {
         let highestID = 0;
         for (let coffee of coffees) {
@@ -84,35 +96,18 @@ function addCoffee(e) {
     }
 }
 
-
+// Render the initial list of coffees
 renderCoffees(coffees)
 
-/*---------Event Listeners---------*/
 
-
-//adding nameSelection Listener
-nameSelection.addEventListener('input', (e) => {
-    updateCoffees(e);
-});
-
-//adding eventListener for add-roast submit button
-addRoastButton.addEventListener('click', (e) => {
-    addCoffee(e);
-
-});
-roastSelection.addEventListener("change", (e) => {
-    updateCoffees(e)
-});
-
-
-// Capitalize first letter
+// Function to capitalize the first letter of a string
 function firstLetterUpperCase(str) {
        return str.replace(/\w\S*/g, function(txt){
            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
        });
 }
 
-// Retrieve save coffees array and loads if save is found
+// Function to load saved coffee data from local storage
 function loadCoffees() {
     let load = JSON.parse(localStorage.getItem('savedCoffees'))
     if (load !== null) {
@@ -120,7 +115,24 @@ function loadCoffees() {
     }
 }
 
-/*Clear local storage*/
+
+// Event listener for input in the name selection field
+nameSelection.addEventListener('input', (e) => {
+    updateCoffees(e);
+});
+
+// Event listener for clicking the add coffee button
+addRoastButton.addEventListener('click', (e) => {
+    addCoffee(e);
+});
+
+// Event listener for changing the roast selection
+roastSelection.addEventListener("change", (e) => {
+    updateCoffees(e)
+});
+
+
+// Clear local storage with Konami code
 let position = 0;
 document.addEventListener("keyup", e => {
     const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "a", "b", "b"]

@@ -1,21 +1,29 @@
+
+/* Global reset for all elements */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* Defining custom CSS variables for reuse */
 :root{
     --bg: ;
     --font-color: #794919;
     --bg-dark: hsla(158, 51%, 10%, 0.44);
 }
+
+/* Styles for the overall page */
 body {
     background-color: #00a984;
 }
 
+/* Main content area */
 main{
     color: var(--font-color);
 }
+
+/* Styles for the first section */
 .sec-1 {
     background-color: var(--bg-dark);
     & h1 {
@@ -24,12 +32,14 @@ main{
 
 }
 
+/* Styles for the second section */
 .sec-2 {
     padding: .5em;
     display: flex;
     flex-flow: row wrap;
 }
 
+/* Styles for the coffee display area */
 .coffee-display {
     flex-basis: 50%;
     flex-grow: 1;
@@ -38,6 +48,7 @@ main{
     align-content: start;
     min-width: 450px;
 
+    /* Styles for individual coffee items */
     .coffee {
         min-width: 200px;
         width: 40%;
@@ -63,6 +74,7 @@ main{
 
 }
 
+/* Styles for the search and add section */
 .search-add {
     min-width:450px;
     flex-basis: 50%;
@@ -113,6 +125,7 @@ main{
 
 }
 
+/* Media query for larger screens */
 @media screen and (min-width:910px) {
     .search-add{
       order: 0;
