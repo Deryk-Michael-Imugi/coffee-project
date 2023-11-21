@@ -1,4 +1,3 @@
-
 /* Global reset for all elements */
 * {
     box-sizing: border-box;
@@ -7,7 +6,7 @@
 }
 
 /* Defining custom CSS variables for reuse */
-:root{
+:root {
     --bg: ;
     --font-color: #794919;
     --bg-dark: hsla(158, 51%, 10%, 0.44);
@@ -19,13 +18,14 @@ body {
 }
 
 /* Main content area */
-main{
+main {
     color: var(--font-color);
 }
 
 /* Styles for the first section */
 .sec-1 {
     background-color: var(--bg-dark);
+
     & h1 {
         padding: .5em;
     }
@@ -34,36 +34,42 @@ main{
 
 /* Styles for the second section */
 .sec-2 {
-    padding: .5em;
     display: flex;
     flex-flow: row wrap;
+    overflow-x: hidden;
 }
 
 /* Styles for the coffee display area */
 .coffee-display {
-    flex-basis: 50%;
+    margin: .5em;
+    flex-basis: 40%;
     flex-grow: 1;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column;
     align-content: start;
     min-width: 450px;
+    max-width: 100%;
 
     /* Styles for individual coffee items */
+
     .coffee {
         min-width: 200px;
-        width: 40%;
+        flex-basis: 40%;
         flex-grow: 1;
-        margin: .5em;
+        flex-shrink: 1;
+        margin: .2em .2em;
         display: flex;
         flex-flow: row;
         align-items: end;
-
+        padding: .2em 0;
         & h2 {
             margin: 0;
             padding: 0;
         }
 
         & p {
+
+        ;
             color: rgba(105, 62, 21, 0.65);
             margin: 0;
             padding: 0;
@@ -76,58 +82,68 @@ main{
 
 /* Styles for the search and add section */
 .search-add {
-    min-width:450px;
-    flex-basis: 50%;
+    min-width: 350px;
+    flex-basis: 40%;
     flex-grow: 1;
     order: -1;
+    display: flex;
+    flex-flow: row wrap;
+    height: max-content;
 
-    & label{
+    & h2 {
+        text-align: center;
+
+    }
+
+    & label {
         font-weight: 700;
     }
+
     & input, & select{
         background-color: var(--bg-dark);
         border: none;
         color: var(--font-color);
         font-size: 1.2rem;
-        &:focus{
+
+        &:focus {
             background-color: var(--bg-dark);
-            color: var(--font-color);
-        }
-        &:active{
-            color: var(--font-color);
-        }
-    }
-    .form-search{
-        & h2{
-            text-align: center;
             color: var(--font-color);
         }
     }
 
-    & button{
+    .form-add, .form-search {
+        min-width: 200px;
+        flex-grow: 1;
+        margin:.5em;
+    }
+
+    & button {
         color: var(--font-color);
         background-color: var(--bg-dark);
         border: none;
         padding: .5em;
         border-radius: .5em;
         font-size: 1.2rem;
-        &:hover{
+
+        &:hover {
             background-color: rgba(255, 255, 255, 0.36);
         }
     }
 
-    .form-add{
-        flex-grow: 1;
-    }
-    .form-search{
-        flex-grow: 1;
-    }
 
 }
 
 /* Media query for larger screens */
-@media screen and (min-width:910px) {
-    .search-add{
-      order: 0;
+@media screen and (min-width: 407px) {
+    .coffee-display{
+        flex-flow:row wrap;
+    }
+}
+
+
+@media screen and (min-width: 816px) {
+    .search-add {
+        order: 0;
+        flex-direction: column;
     }
 }
