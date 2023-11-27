@@ -1,4 +1,5 @@
 "use strict"; // Enable strict mode
+(function() {
 
 // Select relevant HTML elements
 const roastSelection = document.querySelector('#roast-selection');
@@ -30,7 +31,7 @@ loadCoffees()
 function createCoffee(coffee) {
     const coffeeDiv = document.createElement("div");
     coffeeDiv.classList.add("coffee")
-    coffeeDiv.innerHTML = `<h2>${firstLetterUpperCase(coffee.name)}</h2><p>${firstLetterUpperCase(coffee.roast)}</p> `
+    coffeeDiv.innerHTML = `<h3>${firstLetterUpperCase(coffee.name)}</h3><p>${firstLetterUpperCase(coffee.roast)}</p> `
     document.querySelector(".coffee-display").appendChild(coffeeDiv)
 }
 
@@ -58,8 +59,37 @@ function updateCoffees(e) {
         }
     });
 
+    /*For sorting by name or id*/
+    let sortOption = document.querySelector("#sort").value
+    switch (sortOption) {
+        case "name":
+            filteredCoffees.sort(function (a, b) {
+                let x = a.name.toLowerCase();
+                let y = b.name.toLowerCase();
+                if (x < y) {
+                    return -1;
+                }
+                if (x > y) {
+                    return 1;
+                }
+                return 0;
+            })
+            break;
+        case "id":
+            filteredCoffees.sort((a, b) => {
+                return a.id - b.id
+            })
+            break;
+    }
+
+    console.log(filteredCoffees)
     renderCoffees(filteredCoffees);
 }
+
+
+
+
+
 
 // Function to add a new coffee
 function addCoffee(e) {
@@ -102,9 +132,9 @@ renderCoffees(coffees)
 
 // Function to capitalize the first letter of a string
 function firstLetterUpperCase(str) {
-       return str.replace(/\w\S*/g, function(txt){
-           return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-       });
+    return str.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
 }
 
 // Function to load saved coffee data from local storage
@@ -113,6 +143,7 @@ function loadCoffees() {
     if (load !== null) {
         coffees = load;
     }
+    coffees = coffees.sort((a,b)=>{return a.id - b.id})
 }
 
 
@@ -131,6 +162,10 @@ roastSelection.addEventListener("change", (e) => {
     updateCoffees(e)
 });
 
+// Event listener for sorting coffee
+document.querySelector("#sort").addEventListener("change", (e) => {
+    updateCoffees(e)
+})
 
 // Clear local storage with Konami code
 let position = 0;
@@ -148,3 +183,6 @@ document.addEventListener("keyup", e => {
         location.reload()
     }
 })
+})();
+
+
