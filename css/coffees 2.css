@@ -88,8 +88,6 @@ header{
             }
         }
     }
-
-
 }
 
 /*Background*/
@@ -219,7 +217,7 @@ section {
             margin: .2em;
         }
 
-        & select, & input, .option{
+        & select, & input{
             background-color: var(--c-bg-primary);
             color: var(--c-color-accent);
             border-radius: .5rem;
@@ -233,7 +231,6 @@ section {
         & input{
             padding: 0 .5em;
         }
-
 
         & button {
             color: var(--c-color-accent);
@@ -261,7 +258,6 @@ section {
         .select-create {
             order: -1;
             flex-flow: row nowrap;
-            /*flex-flow: column;*/
             justify-content: space-evenly;
             width: 100%;
         }
@@ -289,7 +285,4 @@ section {
             /*padding: 2em 0;*/
         }
     }
-}
-
-@media screen and (max-width: 715px) {
 }
