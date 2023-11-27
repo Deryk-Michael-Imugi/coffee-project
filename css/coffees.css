@@ -141,7 +141,6 @@ section {
         .coffee {
             min-width: 150px;
             width: 20%;
-            /*max-width: 21%;*/
             flex-grow: 1;
             margin: .5em;
             padding: .5em;
@@ -179,7 +178,6 @@ section {
     }
 
     .selection, .create {
-        /*min-width: 410px;*/
         min-width: 270px;
         padding: .5em;
         position: relative;
@@ -282,7 +280,6 @@ section {
 
         & button {
             margin: auto .5em;
-            /*padding: 2em 0;*/
         }
     }
 }
